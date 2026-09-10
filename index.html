@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book a bespoke tattoo session with Daniel Silva. Renowned master artist specializing in hyper-realism, fine line, black & grey, and Japanese Irezumi art in a private luxury studio.">
+  <meta name="keywords" content="Daniel Silva Tattoos, Tattoo Booking, Tattoo Artist, Realism Tattoo, Custom Tattoo Studio, Black and Grey Tattoo">
+  <meta name="author" content="Daniel Silva Tattoos">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Daniel Silva Tattoos | Private Luxury Tattoo Studio & Booking">
+  <meta property="og:description" content="Custom black & grey realism, micro-realism, and Japanese Irezumi body art. Schedule your private consultation and session online.">
+  <meta property="og:image" content="./assets/images/hero_tattoo_art.png">
+  <meta property="og:type" content="website">
+
+  <title>Daniel Silva Tattoos | Private Studio & Tattoo Session Booking</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- External Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- TOP SCROLL PROGRESS BAR -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo">
+        <div class="logo-symbol">DS</div>
+        <div class="logo-text">
+          DANIEL SILVA
+          <span>TATTOOS</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#booking" class="nav-link">Book Session</a></li>
+        <li><a href="#artist" class="nav-link">About Daniel</a></li>
+        <li><a href="#aftercare" class="nav-link">Aftercare</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="#booking" class="btn btn-primary" id="headerBookBtn">Book Session</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-slider" id="heroSlider">
+        <div class="hero-slide active">
+          <img src="./assets/images/hero_tattoo_art.png" alt="Black & Grey Tattoo Artistry" />
+        </div>
+        <div class="hero-slide">
+          <img src="./assets/images/portfolio_realism.png" alt="Realism Lion Tattoo Art" />
+        </div>
+        <div class="hero-slide">
+          <img src="./assets/images/portfolio_japanese.png" alt="Japanese Irezumi Dragon Sleeve" />
+        </div>
+      </div>
+
+      <!-- Slider Indicator Dots -->
+      <div class="hero-slider-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="availability-badge">
+          <span class="status-dot"></span>
+          Accepting Bookings for Q3 & Q4 2026
+        </div>
+
+        <h1 class="hero-title">
+          Bespoke Ink & <br>
+          <span class="text-gold">Fine Art Realism</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Master black & grey realism, intricate fine line, and Japanese Irezumi body art custom crafted in an exclusive, private VIP studio environment.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#booking" class="btn btn-primary">Book Consultation & Session</a>
+          <a href="#portfolio" class="btn btn-outline">Explore Portfolio</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4.8k+</div>
+            <div class="stat-label">Tattoos Crafted</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Private & Sterile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO SHOWCASE -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="portfolio-header">
+        <span class="section-tag">Curated Gallery</span>
+        <h2 class="section-title">Selected Works by Daniel Silva</h2>
+        <p class="section-desc">Each piece is custom designed to complement natural anatomy, using premium vegan-friendly inks and state-of-the-art needle cartridges.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Styles</button>
+        <button class="filter-btn" data-filter="realism">Black & Grey Realism</button>
+        <button class="filter-btn" data-filter="fineline">Fine Line Botanical</button>
+        <button class="filter-btn" data-filter="japanese">Japanese Irezumi</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE BOOKING SYSTEM -->
+  <section class="section" id="booking">
+    <div class="container">
+      <div class="portfolio-header">
+        <span class="section-tag">Reserve Your Session</span>
+        <h2 class="section-title">Schedule a Tattoo Consultation & Session</h2>
+        <p class="section-desc">Complete our 3-step booking form to reserve your date with Daniel Silva. Deposits are applied toward the final cost of your tattoo.</p>
+      </div>
+
+      <!-- Step Indicators -->
+      <div class="wizard-steps">
+        <div class="step-indicator active">
+          <div class="step-num">1</div>
+          <div class="step-label">Idea & Style</div>
+        </div>
+        <div class="step-indicator">
+          <div class="step-num">2</div>
+          <div class="step-label">Date & Time</div>
+        </div>
+        <div class="step-indicator">
+          <div class="step-num">3</div>
+          <div class="step-label">Client Info & Deposit</div>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="booking-form-card">
+        <!-- STEP 1: IDEA & STYLE -->
+        <div class="wizard-step-content active" id="step1">
+          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading); color: var(--gold-primary);">Step 1: Tattoo Idea & Details</h3>
+
+          <div class="form-grid-2" style="margin-bottom: 1.5rem;">
+            <div class="form-group">
+              <label for="bookingStyle">Preferred Tattoo Style</label>
+              <select id="bookingStyle" class="form-select">
+                <option value="Black & Grey Realism">Black & Grey Realism</option>
+                <option value="Fine Line / Micro">Fine Line & Geometric</option>
+                <option value="Japanese Irezumi">Japanese Irezumi</option>
+                <option value="Custom Surrealism">Custom Surrealism</option>
+                <option value="Cover-Up / Touch-Up">Cover-Up / Touch-Up Project</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingPlacement">Placement Location</label>
+              <select id="bookingPlacement" class="form-select">
+                <option value="Forearm">Forearm</option>
+                <option value="Upper Arm / Shoulder">Upper Arm / Shoulder</option>
+                <option value="Full Sleeve">Full Sleeve</option>
+                <option value="Chest / Sternum">Chest / Sternum</option>
+                <option value="Back / Spine">Back / Spine</option>
+                <option value="Thigh / Leg">Thigh / Leg</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label>Color Preference</label>
+            <div style="display: flex; gap: 2rem; margin-top: 0.4rem;">
+              <label style="font-weight: normal; cursor: pointer;">
+                <input type="radio" name="colorMode" value="Black & Grey" checked style="accent-color: var(--gold-primary);"> Black & Grey Tonal
+              </label>
+              <label style="font-weight: normal; cursor: pointer;">
+                <input type="radio" name="colorMode" value="Full Color" style="accent-color: var(--gold-primary);"> Full Color Pigments
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="bookingDesc">Describe Your Concept or Tattoo Subject</label>
+            <textarea id="bookingDesc" class="form-textarea" placeholder="E.g., A realistic lion portrait with pocket watch on forearm, approx 7 inches. I would like high contrast shading and subtle geometric elements..."></textarea>
+          </div>
+
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">📁</div>
+            <div style="font-weight: 600; margin-bottom: 0.25rem;">Drop Reference Images Here (Optional)</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Supports PNG, JPG up to 10MB per file</p>
+          </div>
+        </div>
+
+        <!-- STEP 2: DATE & TIME SELECTION -->
+        <div class="wizard-step-content" id="step2">
+          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading); color: var(--gold-primary);">Step 2: Select Date & Time Slot</h3>
+
+          <div class="calendar-wrapper">
+            <div class="calendar-header">
+              <button class="cal-nav-btn" id="calPrevMonth">❮</button>
+              <h4 id="calMonthTitle" style="font-family: var(--font-heading); font-size: 1.2rem;">September 2026</h4>
+              <button class="cal-nav-btn" id="calNextMonth">❯</button>
+            </div>
+
+            <div class="calendar-grid" id="calGrid">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;">
+            <label style="font-weight: 600; margin-bottom: 0.75rem; display: block;">Available Session Time Slots:</label>
+            <div class="time-slots">
+              <button type="button" class="time-btn" data-time="10:00 AM">🌅 Morning Slot (10:00 AM - 1:30 PM)</button>
+              <button type="button" class="time-btn" data-time="02:00 PM">☀️ Afternoon Slot (2:00 PM - 5:30 PM)</button>
+              <button type="button" class="time-btn" data-time="11:00 AM (Full Day)">⚡ Full Day VIP Session (11:00 AM - 6:00 PM)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: CLIENT INFO & DEPOSIT PAYMENT CHECKOUT -->
+        <div class="wizard-step-content" id="step3">
+          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading); color: var(--gold-primary);">Step 3: Contact Details & Deposit Payment</h3>
+
+          <div class="form-grid-2" style="margin-bottom: 1.2rem;">
+            <div class="form-group">
+              <label for="clientName">Full Legal Name *</label>
+              <input type="text" id="clientName" class="form-input" placeholder="e.g. John Doe">
+            </div>
+
+            <div class="form-group">
+              <label for="clientEmail">Email Address (For Deposit Receipt) *</label>
+              <input type="email" id="clientEmail" class="form-input" placeholder="john@example.com">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom: 1.2rem;">
+            <div class="form-group">
+              <label for="clientPhone">Mobile Phone Number *</label>
+              <input type="tel" id="clientPhone" class="form-input" placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="form-group">
+              <label for="clientIg">Instagram Handle (Optional)</label>
+              <input type="text" id="clientIg" class="form-input" placeholder="@yourusername">
+            </div>
+          </div>
+
+          <!-- Payment Method Selector -->
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">Select Payment Method for $150 Deposit:</label>
+            <div class="option-grid" id="paymentMethodGrid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+              <div class="option-card selected" data-method="venmo">✌️ Venmo</div>
+              <div class="option-card" data-method="chime">💚 Chime</div>
+              <div class="option-card" data-method="applepay"> Apple Pay / GPay</div>
+              <div class="option-card" data-method="paypal">🅿️ PayPal Express</div>
+            </div>
+          </div>
+
+          <!-- Venmo / Chime / Apple Pay / PayPal Contact Support for Tag Container (With Receipt Screenshot Upload) -->
+          <div id="appPaymentForm" style="display: block; background: rgba(212,175,55,0.04); border: 1px dashed var(--border-color); padding: 1.8rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <div style="text-align: center; margin-bottom: 1.2rem;">
+              <div style="font-size: 1.15rem; color: var(--gold-primary); font-weight: 700; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px;" id="appPayTitle">
+                Contact Support for Venmo Payment Tag
+              </div>
+              
+              <!-- Contact Support for Tag Card -->
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 1.4rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                <div style="font-size: 1.05rem; color: #fff; font-weight: 700; margin-bottom: 0.4rem;">
+                  💬 Contact Studio Support to Receive Payment info
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+                  Please reach out to our studio concierge via  <strong>Text support</strong> to get the active payment tag / handle to send your <strong>$150 deposit</strong> to via <strong id="appPayName" style="color: var(--gold-primary);">Venmo</strong>.
+                </p>
+
+                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.8rem;">
+               
+                  <!-- <button type="button" class="btn btn-primary trigger-support-chat-tag" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                    <span>💬</span> Chat Live for Tag
+                  </button> -->
+                  <!-- <a href="tel:+15550192834" class="btn btn-outline" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; border-color: var(--gold-primary); color: var(--gold-primary); display: inline-flex; align-items: center; gap: 0.4rem;">
+                    <span>📞</span> Call/Text
+                  </a> -->
+                </div>
+
+                <!-- <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  ✈️ Telegram: <strong style="color: #fff;">@DanielSilvaTattoos</strong> • ✉️ Email: <strong style="color: #fff;">support@danielsilvatattoos.com</strong>
+                </div> -->
+              </div>
+
+              <!-- <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;" id="appPayDesc">
+                After contacting support on Telegram and completing your deposit, please upload a screenshot of your successful payment confirmation below.
+              </p> -->
+            </div>
+
+            <!-- Screenshot Upload Field -->
+            <div class="form-group">
+              <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">Upload Successful Payment Screenshot *</label>
+              <div class="upload-zone" id="receiptUploadZone" style="padding: 1.5rem;">
+                <div class="upload-icon" id="receiptUploadIcon">📸</div>
+                <div style="font-weight: 600; margin-bottom: 0.25rem;" id="receiptUploadText">Click or Drag & Drop Payment Screenshot</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);" id="receiptUploadSubtext">Supports PNG, JPG, HEIC up to 10MB</p>
+                <input type="file" id="receiptFileInput" accept="image/*" style="display: none;">
+                
+                <!-- Uploaded Image Preview -->
+                <div id="receiptPreviewBox" style="display: none; margin-top: 1rem;">
+                  <img id="receiptPreviewImg" src="" alt="Payment Receipt Screenshot" style="max-height: 160px; border-radius: 8px; border: 1px solid var(--gold-primary);" />
+                  <div style="font-size: 0.85rem; color: var(--accent-green); margin-top: 0.4rem; font-weight: 600;">✓ Payment Screenshot Attached & Verified</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Pay Express Container (Hidden unless selected) -->
+          <div id="expressPaymentForm" style="display: none; background: rgba(212,175,55,0.04); border: 1px dashed var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; text-align: center;">
+            <div style="font-size: 1.1rem; color: var(--gold-primary); margin-bottom: 0.5rem; font-weight: 600;">Fast 1-Tap Checkout</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">You will authorize your $150 deposit payment seamlessly when clicking confirm below.</p>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem;">
+              <input type="checkbox" id="ageConfirm" style="accent-color: var(--gold-primary); margin-top: 4px;">
+              <span style="font-size: 0.9rem; color: var(--text-muted);">
+                I confirm I am 18+ years of age and authorize a <strong>$150.00 deposit</strong> payment. I understand the deposit is fully applied toward my final tattoo session total.
+              </span>
+            </label>
+          </div>
+
+          <div style="background: rgba(212,175,55,0.06); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; font-size: 0.95rem;">
+              <span>Session Deposit Hold:</span>
+              <span>$150.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; font-size: 0.95rem; color: var(--accent-green);">
+              <span>Processing & Studio Fees:</span>
+              <span>FREE ($0.00)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 0.6rem; font-weight: 700;">
+              <span style="font-size: 1.05rem;">Total Due Right Now:</span>
+              <span style="font-family: var(--font-heading); color: var(--gold-primary); font-size: 1.5rem;">$150.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Navigation -->
+        <div class="wizard-footer">
+          <button type="button" class="btn btn-outline" id="btnWizardPrev" style="display: none;">❮ Back</button>
+          <div></div>
+          <button type="button" class="btn btn-primary" id="btnWizardNext">Continue ❯</button>
+          <button type="button" class="btn btn-primary" id="btnWizardSubmit" style="display: none;">Confirm & Secure Session</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTIST BIOGRAPHY & STUDIO -->
+  <section class="section" id="artist">
+    <div class="container">
+      <div class="artist-grid">
+        <div class="artist-image-container">
+          <img src="./assets/images/daniel_silva_artist.png" alt="Daniel Silva Tattoo Artist" />
+        </div>
+
+        <div>
+          <span class="section-tag">Master Tattoo Artist</span>
+          <h2 class="section-title">Meet Daniel Silva</h2>
+          <p class="bio-quote">
+            "Tattooing is not just about putting ink on skin; it is the physical manifestation of legacy, emotion, and identity."
+          </p>
+
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7;">
+            With over 12 years of dedicated practice, Daniel Silva has established himself as one of the world's most sought-after tattoo artists. Having competed at the highest levels in international tattoo competitions, Daniel specializes in hyper-realistic portraits, black & grey gradient storytelling, and anatomical flow.
+          </p>
+
+          <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7;">
+            Every session takes place in a private, ultra-sterile VIP studio suite outfitted with luxury memory-foam massage tables, custom audio/video entertainment, and dedicated aftercare consultation.
+          </p>
+
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-icon">🏆</div>
+              <div>Best Realism Award 2024</div>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">⭐</div>
+              <div>Featured TV Competition Finalist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFTERCARE & HEALING GUIDE -->
+  <section class="section bg-card" id="aftercare">
+    <div class="container">
+      <div class="portfolio-header">
+        <span class="section-tag">Healing Protocol</span>
+        <h2 class="section-title">Interactive Tattoo Aftercare Guide</h2>
+        <p class="section-desc">Proper aftercare ensures maximum longevity, crisp line clarity, and vibrant tonal contrast for your tattoo.</p>
+      </div>
+
+      <div class="aftercare-tabs">
+        <button class="tab-btn active" data-tab="days13">Days 1 - 3 (Initial Healing)</button>
+        <button class="tab-btn" data-tab="days414">Days 4 - 14 (Peeling Phase)</button>
+        <button class="tab-btn" data-tab="month1">Month 1+ (Long Term Care)</button>
+      </div>
+
+      <div class="aftercare-card" id="aftercare-days13">
+        <h3 style="font-family: var(--font-heading); color: var(--gold-primary); margin-bottom: 1rem;">Days 1 - 3: Protection & Sanitization</h3>
+        <ul class="aftercare-steps-list">
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Keep Bandage/SecondSkin Sealed:</strong> Leave protective film on for 24-48 hours as instructed by Daniel.</div>
+          </li>
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Gentle Wash:</strong> Wash gently with lukewarm water and antibacterial unscented soap using clean palms only.</div>
+          </li>
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Pat Dry:</strong> Air dry or pat gently with clean paper towels. Never rub with bath towels.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="aftercare-card" id="aftercare-days414" style="display: none;">
+        <h3 style="font-family: var(--font-heading); color: var(--gold-primary); margin-bottom: 1rem;">Days 4 - 14: Moisturization & Scab Prevention</h3>
+        <ul class="aftercare-steps-list">
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Apply Thin Lotion Layer:</strong> Apply a razor-thin layer of unscented ointment or lotion 2-3 times daily.</div>
+          </li>
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Do NOT Scratch or Pick:</strong> Light flaking is normal. Never pick at scabs to preserve pigment intensity.</div>
+          </li>
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Avoid Submersion:</strong> No swimming pools, hot tubs, or ocean water for at least 2 full weeks.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="aftercare-card" id="aftercare-month1" style="display: none;">
+        <h3 style="font-family: var(--font-heading); color: var(--gold-primary); margin-bottom: 1rem;">Month 1+: Lifetime UV Protection</h3>
+        <ul class="aftercare-steps-list">
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Apply SPF 50+ Sunscreen:</strong> Sun exposure is ink's greatest enemy. Apply high-SPF sunscreen when exposed to UV light.</div>
+          </li>
+          <li class="aftercare-step-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Free Touch-Up Guarantee:</strong> Every session includes a complimentary touch-up within 90 days of healing.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREQUENTLY ASKED QUESTIONS -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="portfolio-header">
+        <span class="section-tag">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How far in advance do I need to book?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Daniel's calendar typically opens 2-3 months in advance. We recommend booking early for weekend slots or multi-session sleeve projects.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Are deposits refundable or transferable?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Deposits are non-refundable as they secure your custom design creation and studio time. However, you can reschedule your session without losing your deposit with at least 48 hours notice.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I request a custom design drawing before booking?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Custom artwork stencils are created after your booking deposit is confirmed. You will review and refine the artwork directly with Daniel prior to tattooing.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Is numbing cream available during the session?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            Yes! We offer medical-grade topical numbing preparations for long sessions upon request during consultation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#hero" class="logo" style="margin-bottom: 1rem;">
+            <div class="logo-symbol">DS</div>
+            <div class="logo-text">DANIEL SILVA <span>TATTOOS</span></div>
+          </a>
+          <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 320px; line-height: 1.6;">
+            World-class custom tattoo art, fine line realism, and bespoke Irezumi in a private luxury atmosphere.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#portfolio">Portfolio Gallery</a></li>
+            <li><a href="#booking">Book Appointment</a></li>
+            <li><a href="#aftercare">Aftercare Guide</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio Hours</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8;">
+            Tuesday – Saturday:<br>
+            11:00 AM – 7:00 PM<br>
+            <span style="color: var(--gold-primary);">By Appointment Only</span>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio Location</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">
+            Arts District Studio<br>
+            742 Santa Fe Ave<br>
+            Los Angeles, CA 90021
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+            <a href="#" class="social-icon" aria-label="TikTok">🎵</a>
+            <a href="#" class="social-icon" aria-label="YouTube">▶️</a>
+          </div>
+        </div>
+      </div>
+
+  
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Daniel Silva Tattoos. All Rights Reserved.</div>
+  
+      </div>
+    </div>
+  </footer>
+
+  <!-- TELEGRAM BOT CONFIGURATION MODAL -->
+  <div class="modal-backdrop" id="telegramConfigModal">
+    <div class="modal-card" style="max-width: 490px; width: 92%;">
+      <button class="modal-close" id="tgConfigClose">✕</button>
+      <div style="text-align: center; margin-bottom: 1.2rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">✈️</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--gold-primary); margin-bottom: 0.3rem;">Telegram Bot Support Bridge</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.4;">
+          Connect your official Telegram Bot so all website visitor messages, payment tag requests, and deposit screenshots ping your phone directly on Telegram!
+        </p>
+      </div>
+
+      <form id="tgConfigForm">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="tgBotTokenInput" style="font-size: 0.85rem; font-weight: 600; color: #fff;">Telegram Bot Token (From @BotFather): *</label>
+          <input type="text" id="tgBotTokenInput" class="form-input" placeholder="e.g. 789012345:AAH_example_token_key" style="font-family: monospace; font-size: 0.85rem;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.2rem;">
+          <label for="tgChatIdInput" style="font-size: 0.85rem; font-weight: 600; color: #fff;">Your Telegram Chat ID (From @userinfobot): *</label>
+          <input type="text" id="tgChatIdInput" class="form-input" placeholder="e.g. 987654321" style="font-family: monospace; font-size: 0.85rem;">
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.2rem;">
+          💡 <strong>How it works:</strong> Create a bot via <code>@BotFather</code> on Telegram, paste the token & your Chat ID above. All visitor support texts will instantly forward to your Telegram app!
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-outline" id="btnTestTgBot" style="flex: 1; min-width: 140px;">🧪 Test Connection</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1; min-width: 140px;">💾 Save Telegram Config</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="modal-backdrop" id="lightboxModal">
+    <div class="modal-card lightbox-card">
+      <button class="modal-close" id="lightboxClose">×</button>
+      <div class="lightbox-img-wrapper">
+        <img id="lightboxImg" src="" alt="Tattoo Artwork Detail" />
+      </div>
+      <div class="lightbox-details">
+        <div>
+          <span class="section-tag" id="lightboxCategory">Category</span>
+          <h3 class="section-title" id="lightboxTitle" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Title</h3>
+          <p id="lightboxDesc" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Description</p>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem;">
+              <span>Session Duration:</span>
+              <strong id="lightboxTime" style="color: var(--gold-primary);">Time</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+              <span>Recommended Placement:</span>
+              <strong id="lightboxPlacement">Placement</strong>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="lightboxBookBtn" style="width: 100%;">
+          Book Similar Custom Piece
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING CONFIRMATION MODAL -->
+  <div class="modal-backdrop" id="confirmationModal">
+    <div class="modal-card ticket-card">
+      <button class="modal-close" onclick="document.getElementById('confirmationModal').classList.remove('active')">×</button>
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
+      <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-primary);">Session & Deposit Confirmed!</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+        Thank you, <strong id="confirmName" style="color: #fff;">Client</strong>. Your $150 deposit has been processed and your tattoo session with Daniel Silva is officially locked.
+      </p>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;">
+        <div class="booking-ref-badge" style="margin: 0;">
+          BOOKING REF: <span id="confirmRef">DS-8942</span>
+        </div>
+        <div class="booking-ref-badge" style="margin: 0; background: rgba(16, 185, 129, 0.15); border-color: var(--accent-green); color: var(--accent-green);">
+          DEPOSIT PAID: $150.00
+        </div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 1.2rem; text-align: left; margin: 1.5rem 0; font-size: 0.9rem;">
+        <div style="margin-bottom: 0.5rem;">📅 <strong>Scheduled Appointment:</strong> <span id="confirmDate">Date</span></div>
+        <div style="margin-bottom: 0.5rem;">🎨 <strong>Tattoo Concept:</strong> <span id="confirmDetails">Style</span></div>
+        <div>💳 <strong>Transaction ID:</strong> <span id="confirmTxn" style="font-family: monospace; color: var(--gold-primary);">TXN-98402184</span></div>
+      </div>
+
+      <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" id="btnCalSync" style="flex: 1; min-width: 140px;">📅 Sync Calendar</button>
+        <button class="btn btn-outline" id="btnPrintReceipt" style="flex: 1; min-width: 140px;">🧾 Save Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDIO SUPPORT MODAL -->
+  <div class="modal-backdrop" id="supportModal">
+    <div class="modal-card" style="max-width: 520px; width: 92%;">
+      <button class="modal-close" id="supportModalClose">×</button>
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.4rem;">💬</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-primary); margin-bottom: 0.3rem;">Daniel Silva Studio Support</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Instant assistance for tattoo bookings, $150 deposit transfers (Venmo, Chime, Apple Pay, PayPal), & custom artwork consultations.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.5rem;">
+        <a href="https://t.me/DanielSilvaTattoos" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; justify-content: space-between; background: rgba(0, 136, 204, 0.1); border: 1px solid #0088cc; padding: 1rem 1.2rem; border-radius: var(--radius-sm); color: #fff; transition: var(--transition);">
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <span style="font-size: 1.4rem;">✈️</span>
+            <div>
+              <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">Telegram Direct Support</div>
+              <div style="font-size: 0.8rem; color: #76c7ff;">@DanielSilvaTattoos (Official Telegram)</div>
+            </div>
+          </div>
+          <span style="color: #0088cc; font-weight: 700; font-size: 1.2rem;">❯</span>
+        </a>
+
+        <a href="tel:+15550192834" style="text-decoration: none; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 1rem 1.2rem; border-radius: var(--radius-sm); color: var(--text-main); transition: var(--transition);">
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <span style="font-size: 1.4rem;">📞</span>
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Call / Text Studio Line</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">+1 (555) 019-2834 (Immediate Response)</div>
+            </div>
+          </div>
+          <span style="color: var(--gold-primary); font-weight: 700; font-size: 1.2rem;">❯</span>
+        </a>
+
+        <a href="mailto:support@danielsilvatattoos.com" style="text-decoration: none; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 1rem 1.2rem; border-radius: var(--radius-sm); color: var(--text-main); transition: var(--transition);">
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <span style="font-size: 1.4rem;">✉️</span>
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Email Studio Concierge</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">support@danielsilvatattoos.com</div>
+            </div>
+          </div>
+          <span style="color: var(--gold-primary); font-weight: 700; font-size: 1.2rem;">❯</span>
+        </a>
+
+        <div style="background: rgba(212,175,55,0.05); border: 1px dashed var(--border-color); padding: 1rem 1.2rem; border-radius: var(--radius-sm);">
+          <div style="font-weight: 700; font-size: 0.9rem; color: var(--gold-primary); margin-bottom: 0.4rem;">
+            💳 Deposit Handles & Quick Support:
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <div>✈️ Telegram: <strong style="color: #fff;">@DanielSilvaTattoos</strong></div>
+            <div>✌️ Venmo: <strong style="color: #fff;">@DanielSilvaTattoos</strong></div>
+            <div>💚 Chime: <strong style="color: #fff;">$DanielSilvaTattoos</strong></div>
+            <div> Apple Pay: <strong style="color: #fff;">(555) 019-2834</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.8rem;">
+        <button type="button" class="btn btn-primary" style="flex: 1; text-align: center;" onclick="document.getElementById('supportModal').classList.remove('active'); location.hash='booking';">
+          📅 Go to $150 Deposit Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE 1-ON-1 SUPPORT CHAT WIDGET -->
+  <div class="support-chat-widget" id="supportChatWidget">
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar-wrapper">
+          <img src="./assets/images/daniel_silva_artist.png" alt="Sarah Studio Concierge" class="chat-avatar">
+          <span class="chat-status-dot"></span>
+        </div>
+        <div>
+          <div class="chat-header-title">Studio Live Support</div>
+          <div class="chat-header-subtitle">1-on-1 Support • 🟢 Online</div>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <!-- <button type="button" class="btn-chat-sms" id="chatAttachTrigger" title="Attach Photo or Payment Receipt">📎 Photo</button> -->
+        <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close Chat">✕</button>
+      </div>
+    </div>
+
+    <!-- Chat Messages Body -->
+    <div class="chat-body" id="chatMessages">
+      <div class="chat-system-time">Live 1-on-1 Studio Support</div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div class="chat-typing-indicator" id="chatTyping" style="display: none;">
+      <div class="typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <span style="color: var(--text-muted); font-size: 0.78rem;">Studio Support is typing...</span>
+    </div>
+
+    <!-- Chat Input Footer -->
+    <form class="chat-footer" id="chatForm">
+      <input type="file" id="chatFileInput" accept="image/*" style="display: none;">
+      <button type="button" class="chat-action-btn" id="chatAttachBtn" title="Attach Photo / Receipt">📎</button>
+      <input type="text" id="chatInput" class="chat-input" placeholder="Type your message here..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" id="chatSendBtn" aria-label="Send Message">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Floating Launcher Button -->
+  <button class="floating-chat-launcher" id="floatingChatLauncher" aria-label="Open Support Text Chat">
+    <span class="unread-badge" id="chatUnreadBadge" style="display: none;">1</span>
+    <span class="launcher-icon">💬</span>
+    <span class="launcher-label">Text Support</span>
+  </button>
+
+  <!-- Floating Quick Booking Bar for Mobile -->
+  <a href="#booking" class="mobile-floating-cta" id="mobileFloatingCta">
+    <span>📅</span> Book Tattoo Session
+  </a>
+
+  <!-- JavaScript -->
+  <script src="app.js?v=13.0"></script>
+</body>
+</html>
