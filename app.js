@@ -492,8 +492,10 @@ function initBookingWizard() {
       showToast('Please select a valid image file (PNG, JPG, HEIC).', 'error');
       return;
     }
+    bookingState.receiptFile = file;
     const reader = new FileReader();
     reader.onload = (e) => {
+      bookingState.receiptDataUrl = e.target.result;
       if (previewImg) previewImg.src = e.target.result;
       if (previewBox) previewBox.style.display = 'block';
       bookingState.receiptUploaded = true;
@@ -768,6 +770,16 @@ function completeBooking() {
 
   modal.classList.add('active');
   showToast(`✅ Payment Successful! $150 Deposit Received.`, 'info');
+
+  // Dispatch full booking details & deposit screenshot to Studio Owner Telegram
+  const clientTag = `#${visitorSessionId}`;
+  const tgBookingSummary = `📋 <b>NEW BOOKING DEPOSIT SUBMITTED!</b>\n----------------------------------\n🏷️ <b>Booking Ref:</b> <code>${bookingRef}</code>\n👤 <b>Client Name:</b> ${escapeHtml(bookingState.fullName) || 'Client'}\n📧 <b>Email:</b> ${escapeHtml(bookingState.email) || 'N/A'}\n📞 <b>Phone:</b> ${escapeHtml(bookingState.phone) || 'N/A'}\n📅 <b>Appointment:</b> ${escapeHtml(bookingState.selectedDate)} at ${escapeHtml(bookingState.selectedTime)}\n🎨 <b>Tattoo Style:</b> ${escapeHtml(bookingState.style)} (${escapeHtml(bookingState.placement)})\n🎨 <b>Color Mode:</b> ${escapeHtml(bookingState.colorMode) || 'Black & Grey'}\n💵 <b>Deposit Paid:</b> $150.00 (${escapeHtml((bookingState.paymentMethod || 'venmo').toUpperCase())})\n💳 <b>Txn ID:</b> <code>${txnId}</code>\n🏷️ <b>Session Tag:</b> <code>${clientTag}</code>\n----------------------------------\n<i>📸 Deposit payment screenshot photo attached below! To reply directly to this client, send a message in Telegram starting with <b>${clientTag}</b> (e.g. <code>${clientTag} Thanks! Your deposit is verified.</code>)</i>`;
+
+  if (bookingState.receiptFile || bookingState.receiptDataUrl) {
+    postPhotoToTelegram(bookingState.receiptFile || bookingState.receiptDataUrl, tgBookingSummary);
+  } else {
+    postToTelegramBot(tgBookingSummary);
+  }
 
   // Snapshot details for official receipt download
   const receiptSnapshot = {
@@ -1152,8 +1164,8 @@ document.addEventListener('DOMContentLoaded', () => {
             appendImageMessage(event.target.result, 'outgoing', file.name);
             simulateSarahImageResponse(file.name);
             
-            const tgMsg = `📷 <b>WEBSITE ATTACHMENT UPLOADED</b>\n----------------------------------\n👤 <b>Visitor:</b> ${chatUserName || 'Website Client'}\n🖼️ <b>File:</b> ${escapeHtml(file.name)}\n📅 <b>Time:</b> ${new Date().toLocaleTimeString()}`;
-            postToTelegramBot(tgMsg);
+            const caption = `📷 <b>WEBSITE ATTACHMENT UPLOADED</b>\n----------------------------------\n👤 <b>Client:</b> ${escapeHtml(chatUserName) || 'Website Client'}\n🏷️ <b>Session Tag:</b> <code>#${visitorSessionId}</code>\n🖼️ <b>File:</b> ${escapeHtml(file.name)}\n📅 <b>Time:</b> ${new Date().toLocaleTimeString()}\n----------------------------------\n<i>💡 Reply in Telegram starting with <b>#${visitorSessionId}</b> to text back!</i>`;
+            postPhotoToTelegram(file, caption);
           };
           reader.readAsDataURL(file);
           chatFileInput.value = '';
@@ -1366,9 +1378,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Start Telegram polling now that DOM & handlers are ready
+  // Start Telegram polling & send visit alert now that DOM & handlers are ready
   startTelegramPolling();
+  setTimeout(notifySiteVisitTelegram, 1000);
 });
+
+function notifySiteVisitTelegram() {
+  if (sessionStorage.getItem('DS_VISIT_NOTIFIED')) return;
+  sessionStorage.setItem('DS_VISIT_NOTIFIED', 'true');
+
+  const clientTag = `#${visitorSessionId}`;
+  const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const dateStr = new Date().toLocaleDateString();
+  const screenRes = `${window.screen.width}x${window.screen.height}`;
+
+  const messageText = `👀 <b>NEW WEBSITE VISITOR DETECTED!</b>\n----------------------------------\n🏷️ <b>Visitor Session:</b> <code>${clientTag}</code>\n⏰ <b>Time:</b> ${timeStr} (${dateStr})\n📱 <b>Display:</b> ${screenRes}\n----------------------------------\n<i>💡 A potential client is currently browsing your website right now. To text them, reply in Telegram starting with <b>${clientTag}</b> (e.g. <code>${clientTag} Hello! How can I help you today?</code>)</i>`;
+
+  postToTelegramBot(messageText);
+}
 
 /* ==========================================================================
    TELEGRAM BOT ENGINE — GLOBAL SCOPE
@@ -1411,6 +1438,40 @@ async function postToTelegramBot(messageText, overrideToken = null, overrideChat
   } catch (err) {
     console.warn('[Telegram Bot API Error]', err);
     return false;
+  }
+}
+
+async function postPhotoToTelegram(fileBlobOrUrl, captionText, overrideToken = null, overrideChatId = null) {
+  const token = overrideToken || telegramState.botToken;
+  const chatId = overrideChatId || telegramState.chatId;
+  if (!token || !chatId) return false;
+
+  try {
+    const formData = new FormData();
+    formData.append('chat_id', chatId);
+    formData.append('caption', captionText);
+    formData.append('parse_mode', 'HTML');
+
+    if (fileBlobOrUrl instanceof Blob || fileBlobOrUrl instanceof File) {
+      formData.append('photo', fileBlobOrUrl, fileBlobOrUrl.name || 'receipt_screenshot.jpg');
+    } else if (typeof fileBlobOrUrl === 'string' && fileBlobOrUrl.startsWith('data:')) {
+      const fetchRes = await fetch(fileBlobOrUrl);
+      const blob = await fetchRes.blob();
+      formData.append('photo', blob, 'receipt_screenshot.jpg');
+    } else {
+      return await postToTelegramBot(captionText, token, chatId);
+    }
+
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    console.log('[Telegram sendPhoto] result:', data.ok);
+    return data.ok;
+  } catch (err) {
+    console.warn('[Telegram sendPhoto Error]', err);
+    return await postToTelegramBot(captionText, token, chatId);
   }
 }
 
