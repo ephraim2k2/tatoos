@@ -243,9 +243,9 @@
           </div>
         </div>
 
-        <!-- STEP 3: CLIENT INFO & DEPOSIT PAYMENT CHECKOUT -->
+        <!-- STEP 3: CLIENT INFO & APPOINTMENT REQUEST -->
         <div class="wizard-step-content" id="step3">
-          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading); color: var(--gold-primary);">Step 3: Contact Details & Deposit Payment</h3>
+          <h3 style="margin-bottom: 1.5rem; font-family: var(--font-heading); color: var(--gold-primary);">Step 3: Contact Details & Request Confirmation</h3>
 
           <div class="form-grid-2" style="margin-bottom: 1.2rem;">
             <div class="form-group">
@@ -254,14 +254,14 @@
             </div>
 
             <div class="form-group">
-              <label for="clientEmail">Email Address (For Deposit Receipt) *</label>
+              <label for="clientEmail">Email Address (For Appointment Details) *</label>
               <input type="email" id="clientEmail" class="form-input" placeholder="john@example.com">
             </div>
           </div>
 
           <div class="form-grid-2" style="margin-bottom: 1.2rem;">
             <div class="form-group">
-              <label for="clientPhone">Mobile Phone Number *</label>
+              <label for="clientPhone">Mobile Phone Number (Call / Text) *</label>
               <input type="tel" id="clientPhone" class="form-input" placeholder="+1 (555) 000-0000">
             </div>
 
@@ -271,99 +271,30 @@
             </div>
           </div>
 
-          <!-- Payment Method Selector -->
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">Select Payment Method for $150 Deposit:</label>
-            <div class="option-grid" id="paymentMethodGrid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
-              <div class="option-card selected" data-method="venmo">✌️ Venmo</div>
-              <div class="option-card" data-method="chime">💚 Chime</div>
-              <div class="option-card" data-method="applepay"> Apple Pay / GPay</div>
-              <div class="option-card" data-method="paypal">🅿️ PayPal Express</div>
-            </div>
-          </div>
-
-          <!-- Venmo / Chime / Apple Pay / PayPal Contact Support for Tag Container (With Receipt Screenshot Upload) -->
-          <div id="appPaymentForm" style="display: block; background: rgba(212,175,55,0.04); border: 1px dashed var(--border-color); padding: 1.8rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-            <div style="text-align: center; margin-bottom: 1.2rem;">
-              <div style="font-size: 1.15rem; color: var(--gold-primary); font-weight: 700; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px;" id="appPayTitle">
-                Contact Support for Venmo Payment Tag
-              </div>
-              
-              <!-- Contact Support for Tag Card -->
-              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); padding: 1.4rem; border-radius: 12px; margin-bottom: 1.2rem;">
-                <div style="font-size: 1.05rem; color: #fff; font-weight: 700; margin-bottom: 0.4rem;">
-                  💬 Contact Studio Support to Receive Payment info
-                </div>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
-                  Please reach out to our studio concierge via  <strong>Text support</strong> to get the active payment tag / handle to send your <strong>$150 deposit</strong> to via <strong id="appPayName" style="color: var(--gold-primary);">Venmo</strong>.
-                </p>
-
-                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.8rem;">
-               
-                  <!-- <button type="button" class="btn btn-primary trigger-support-chat-tag" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-                    <span>💬</span> Chat Live for Tag
-                  </button> -->
-                  <!-- <a href="tel:+15550192834" class="btn btn-outline" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; border-color: var(--gold-primary); color: var(--gold-primary); display: inline-flex; align-items: center; gap: 0.4rem;">
-                    <span>📞</span> Call/Text
-                  </a> -->
-                </div>
-
-                <!-- <div style="font-size: 0.8rem; color: var(--text-muted);">
-                  ✈️ Telegram: <strong style="color: #fff;">@DanielSilvaTattoos</strong> • ✉️ Email: <strong style="color: #fff;">support@danielsilvatattoos.com</strong>
-                </div> -->
-              </div>
-
-              <!-- <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;" id="appPayDesc">
-                After contacting support on Telegram and completing your deposit, please upload a screenshot of your successful payment confirmation below.
-              </p> -->
-            </div>
-
-            <!-- Screenshot Upload Field -->
-            <div class="form-group">
-              <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;">Upload Successful Payment Screenshot *</label>
-              <div class="upload-zone" id="receiptUploadZone" style="padding: 1.5rem;">
-                <div class="upload-icon" id="receiptUploadIcon">📸</div>
-                <div style="font-weight: 600; margin-bottom: 0.25rem;" id="receiptUploadText">Click or Drag & Drop Payment Screenshot</div>
-                <p style="font-size: 0.8rem; color: var(--text-muted);" id="receiptUploadSubtext">Supports PNG, JPG, HEIC up to 10MB</p>
-                <input type="file" id="receiptFileInput" accept="image/*" style="display: none;">
-                
-                <!-- Uploaded Image Preview -->
-                <div id="receiptPreviewBox" style="display: none; margin-top: 1rem;">
-                  <img id="receiptPreviewImg" src="" alt="Payment Receipt Screenshot" style="max-height: 160px; border-radius: 8px; border: 1px solid var(--gold-primary);" />
-                  <div style="font-size: 0.85rem; color: var(--accent-green); margin-top: 0.4rem; font-weight: 600;">✓ Payment Screenshot Attached & Verified</div>
-                </div>
+          <!-- Request Deposit Notice Container -->
+          <div style="background: rgba(212,175,55,0.05); border: 1px solid var(--gold-primary); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem;">
+              <span style="font-size: 1.8rem;">📱</span>
+              <div>
+                <h4 style="font-family: var(--font-heading); color: var(--gold-primary); font-size: 1.1rem; margin: 0;">Deposit & Booking Process</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">No payment required right now on the website.</p>
               </div>
             </div>
-          </div>
-
-          <!-- Quick Pay Express Container (Hidden unless selected) -->
-          <div id="expressPaymentForm" style="display: none; background: rgba(212,175,55,0.04); border: 1px dashed var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; text-align: center;">
-            <div style="font-size: 1.1rem; color: var(--gold-primary); margin-bottom: 0.5rem; font-weight: 600;">Fast 1-Tap Checkout</div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">You will authorize your $150 deposit payment seamlessly when clicking confirm below.</p>
+            <p style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; margin-bottom: 0.8rem;">
+              Once you submit your appointment request, Daniel Silva's studio team will review your concept and reach out to you directly via <strong>Phone Call, Text, or Email</strong> with official deposit instructions for your <strong>$150 deposit</strong> to lock in your appointment date.
+            </p>
+            <div style="font-size: 0.82rem; color: var(--accent-green); font-weight: 600;">
+              ✓ Your $150 deposit is fully applied toward the total cost of your final tattoo session.
+            </div>
           </div>
 
           <div class="form-group" style="margin-bottom: 1.5rem;">
             <label style="cursor: pointer; display: flex; align-items: flex-start; gap: 0.75rem;">
               <input type="checkbox" id="ageConfirm" style="accent-color: var(--gold-primary); margin-top: 4px;">
               <span style="font-size: 0.9rem; color: var(--text-muted);">
-                I confirm I am 18+ years of age and authorize a <strong>$150.00 deposit</strong> payment. I understand the deposit is fully applied toward my final tattoo session total.
+                I confirm I am 18+ years of age and request a tattoo session with Daniel Silva. I agree to receive appointment details & deposit payment instructions via phone or email.
               </span>
             </label>
-          </div>
-
-          <div style="background: rgba(212,175,55,0.06); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; font-size: 0.95rem;">
-              <span>Session Deposit Hold:</span>
-              <span>$150.00</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; font-size: 0.95rem; color: var(--accent-green);">
-              <span>Processing & Studio Fees:</span>
-              <span>FREE ($0.00)</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 0.6rem; font-weight: 700;">
-              <span style="font-size: 1.05rem;">Total Due Right Now:</span>
-              <span style="font-family: var(--font-heading); color: var(--gold-primary); font-size: 1.5rem;">$150.00</span>
-            </div>
           </div>
         </div>
 
@@ -372,7 +303,7 @@
           <button type="button" class="btn btn-outline" id="btnWizardPrev" style="display: none;">❮ Back</button>
           <div></div>
           <button type="button" class="btn btn-primary" id="btnWizardNext">Continue ❯</button>
-          <button type="button" class="btn btn-primary" id="btnWizardSubmit" style="display: none;">Confirm & Secure Session</button>
+          <button type="button" class="btn btn-primary" id="btnWizardSubmit" style="display: none;">📅 Submit Session Request</button>
         </div>
       </div>
     </div>
@@ -664,29 +595,29 @@
     <div class="modal-card ticket-card">
       <button class="modal-close" onclick="document.getElementById('confirmationModal').classList.remove('active')">×</button>
       <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
-      <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-primary);">Session & Deposit Confirmed!</h3>
+      <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-primary);">Session Request Received!</h3>
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
-        Thank you, <strong id="confirmName" style="color: #fff;">Client</strong>. Your $150 deposit has been processed and your tattoo session with Daniel Silva is officially locked.
+        Thank you, <strong id="confirmName" style="color: #fff;">Client</strong>. Your tattoo appointment request for Daniel Silva has been registered. Our team will contact you shortly via <strong>Phone Call, SMS Text, or Email</strong> with payment details for your $150 deposit to confirm your slot.
       </p>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;">
         <div class="booking-ref-badge" style="margin: 0;">
-          BOOKING REF: <span id="confirmRef">DS-8942</span>
+          REQUEST REF: <span id="confirmRef">DS-8942</span>
         </div>
-        <div class="booking-ref-badge" style="margin: 0; background: rgba(16, 185, 129, 0.15); border-color: var(--accent-green); color: var(--accent-green);">
-          DEPOSIT PAID: $150.00
+        <div class="booking-ref-badge" style="margin: 0; background: rgba(212, 175, 55, 0.15); border-color: var(--gold-primary); color: var(--gold-primary);">
+          DEPOSIT: PENDING CONTACT ($150)
         </div>
       </div>
 
       <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 1.2rem; text-align: left; margin: 1.5rem 0; font-size: 0.9rem;">
-        <div style="margin-bottom: 0.5rem;">📅 <strong>Scheduled Appointment:</strong> <span id="confirmDate">Date</span></div>
+        <div style="margin-bottom: 0.5rem;">📅 <strong>Requested Session:</strong> <span id="confirmDate">Date</span></div>
         <div style="margin-bottom: 0.5rem;">🎨 <strong>Tattoo Concept:</strong> <span id="confirmDetails">Style</span></div>
-        <div>💳 <strong>Transaction ID:</strong> <span id="confirmTxn" style="font-family: monospace; color: var(--gold-primary);">TXN-98402184</span></div>
+        <div>💳 <strong>Request Reference ID:</strong> <span id="confirmTxn" style="font-family: monospace; color: var(--gold-primary);">REQ-98402184</span></div>
       </div>
 
       <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
         <button class="btn btn-primary" id="btnCalSync" style="flex: 1; min-width: 140px;">📅 Sync Calendar</button>
-        <button class="btn btn-outline" id="btnPrintReceipt" style="flex: 1; min-width: 140px;">🧾 Save Receipt</button>
+        <button class="btn btn-outline" id="btnPrintReceipt" style="flex: 1; min-width: 140px;">🧾 Save Request Summary</button>
       </div>
     </div>
   </div>
@@ -699,7 +630,7 @@
         <div style="font-size: 2.5rem; margin-bottom: 0.4rem;">💬</div>
         <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-primary); margin-bottom: 0.3rem;">Daniel Silva Studio Support</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-          Instant assistance for tattoo bookings, $150 deposit transfers (Venmo, Chime, Apple Pay, PayPal), & custom artwork consultations.
+          Instant assistance for tattoo bookings, deposit inquiries, & custom artwork consultations.
         </p>
       </div>
 
@@ -736,18 +667,6 @@
           </div>
           <span style="color: var(--gold-primary); font-weight: 700; font-size: 1.2rem;">❯</span>
         </a>
-
-        <div style="background: rgba(212,175,55,0.05); border: 1px dashed var(--border-color); padding: 1rem 1.2rem; border-radius: var(--radius-sm);">
-          <div style="font-weight: 700; font-size: 0.9rem; color: var(--gold-primary); margin-bottom: 0.4rem;">
-            💳 Deposit Handles & Quick Support:
-          </div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-            <div>✈️ Telegram: <strong style="color: #fff;">@DanielSilvaTattoos</strong></div>
-            <div>✌️ Venmo: <strong style="color: #fff;">@DanielSilvaTattoos</strong></div>
-            <div>💚 Chime: <strong style="color: #fff;">$DanielSilvaTattoos</strong></div>
-            <div> Apple Pay: <strong style="color: #fff;">(555) 019-2834</strong></div>
-          </div>
-        </div>
       </div>
 
       <div style="display: flex; gap: 0.8rem;">
@@ -815,6 +734,6 @@
   </a>
 
   <!-- JavaScript -->
-  <script src="app.js?v=15.0"></script>
+  <script src="app.js?v=17.0"></script>
 </body>
 </html>

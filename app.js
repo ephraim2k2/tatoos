@@ -600,12 +600,12 @@ function initBookingWizard() {
     e.preventDefault();
     if (validateStep(3)) {
       submitBtn.disabled = true;
-      submitBtn.textContent = '⚡ Verifying $150 Payment...';
+      submitBtn.textContent = '⚡ Submitting Session Request...';
       
       setTimeout(() => {
         submitBtn.disabled = false;
         completeBooking();
-      }, 1200);
+      }, 1000);
     }
   });
 
@@ -646,20 +646,15 @@ function validateStep(step) {
       return false;
     }
 
-    if (!bookingState.receiptUploaded) {
-      const methodLabel = bookingState.paymentMethod ? bookingState.paymentMethod.toUpperCase() : 'PAYMENT';
-      showToast(`Please contact support or upload a screenshot of your successful ${methodLabel} payment.`, 'error');
-      return false;
-    }
-
     if (!ageCheck) {
-      showToast('You must authorize the $150 deposit payment and confirm you are 18+.', 'error');
+      showToast('Please confirm you are 18+ years of age to request an appointment.', 'error');
       return false;
     }
 
     bookingState.fullName = name;
     bookingState.email = email;
     bookingState.phone = phone;
+    bookingState.instagram = document.getElementById('clientIg')?.value.trim() || 'N/A';
     return true;
   }
 
@@ -758,7 +753,7 @@ function initCalendar() {
 function completeBooking() {
   const modal = document.getElementById('confirmationModal');
   const bookingRef = `DS-${Math.floor(1000 + Math.random() * 9000)}`;
-  const txnId = `TXN-${Math.floor(10000000 + Math.random() * 90000000)}`;
+  const txnId = `REQ-${Math.floor(10000000 + Math.random() * 90000000)}`;
 
   document.getElementById('confirmRef').textContent = bookingRef;
   document.getElementById('confirmName').textContent = bookingState.fullName;
@@ -769,17 +764,13 @@ function completeBooking() {
   if (txnElem) txnElem.textContent = txnId;
 
   modal.classList.add('active');
-  showToast(`✅ Payment Successful! $150 Deposit Received.`, 'info');
+  showToast(`✅ Session Request Received! We will contact you shortly.`, 'info');
 
-  // Dispatch full booking details & deposit screenshot to Studio Owner Telegram
+  // Dispatch full appointment request details to Studio Owner Telegram
   const clientTag = `#${visitorSessionId}`;
-  const tgBookingSummary = `📋 <b>NEW BOOKING DEPOSIT SUBMITTED!</b>\n----------------------------------\n🏷️ <b>Booking Ref:</b> <code>${bookingRef}</code>\n👤 <b>Client Name:</b> ${escapeHtml(bookingState.fullName) || 'Client'}\n📧 <b>Email:</b> ${escapeHtml(bookingState.email) || 'N/A'}\n📞 <b>Phone:</b> ${escapeHtml(bookingState.phone) || 'N/A'}\n📅 <b>Appointment:</b> ${escapeHtml(bookingState.selectedDate)} at ${escapeHtml(bookingState.selectedTime)}\n🎨 <b>Tattoo Style:</b> ${escapeHtml(bookingState.style)} (${escapeHtml(bookingState.placement)})\n🎨 <b>Color Mode:</b> ${escapeHtml(bookingState.colorMode) || 'Black & Grey'}\n💵 <b>Deposit Paid:</b> $150.00 (${escapeHtml((bookingState.paymentMethod || 'venmo').toUpperCase())})\n💳 <b>Txn ID:</b> <code>${txnId}</code>\n🏷️ <b>Session Tag:</b> <code>${clientTag}</code>\n----------------------------------\n<i>📸 Deposit payment screenshot photo attached below! To reply directly to this client, send a message in Telegram starting with <b>${clientTag}</b> (e.g. <code>${clientTag} Thanks! Your deposit is verified.</code>)</i>`;
+  const tgBookingSummary = `📋 <b>NEW APPOINTMENT REQUEST SUBMITTED!</b>\n----------------------------------\n🏷️ <b>Request Ref:</b> <code>${bookingRef}</code>\n👤 <b>Client Name:</b> ${escapeHtml(bookingState.fullName) || 'Client'}\n📧 <b>Email:</b> ${escapeHtml(bookingState.email) || 'N/A'}\n📞 <b>Phone:</b> ${escapeHtml(bookingState.phone) || 'N/A'}\n📸 <b>Instagram:</b> ${escapeHtml(bookingState.instagram) || 'N/A'}\n📅 <b>Requested Date:</b> ${escapeHtml(bookingState.selectedDate)} at ${escapeHtml(bookingState.selectedTime)}\n🎨 <b>Tattoo Concept:</b> ${escapeHtml(bookingState.style)} (${escapeHtml(bookingState.placement)})\n🎨 <b>Color Mode:</b> ${escapeHtml(bookingState.colorMode) || 'Black & Grey'}\n📝 <b>Description:</b> ${escapeHtml(bookingState.description) || 'Custom Tattoo'}\n💵 <b>Deposit Status:</b> Pending Studio Contact ($150 Deposit)\n🏷️ <b>Session Tag:</b> <code>${clientTag}</code>\n----------------------------------\n<i>💡 Contact client via Phone Call, Text, or Email with your deposit details! Or reply in Telegram starting with <b>${clientTag}</b></i>`;
 
-  if (bookingState.receiptFile || bookingState.receiptDataUrl) {
-    postPhotoToTelegram(bookingState.receiptFile || bookingState.receiptDataUrl, tgBookingSummary);
-  } else {
-    postToTelegramBot(tgBookingSummary);
-  }
+  postToTelegramBot(tgBookingSummary);
 
   // Snapshot details for official receipt download
   const receiptSnapshot = {
@@ -793,8 +784,7 @@ function completeBooking() {
     colorMode: bookingState.colorMode || 'Black & Grey',
     date: bookingState.selectedDate || 'Scheduled Session',
     time: bookingState.selectedTime || 'TBD',
-    paymentMethod: bookingState.paymentMethod || 'venmo',
-    depositAmount: bookingState.depositAmount || 150,
+    depositAmount: 150,
     issueDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })
   };
 
@@ -828,14 +818,13 @@ function downloadOfficialReceipt(data) {
   const safeColor = escapeHtml(data.colorMode);
   const safeDate = escapeHtml(data.date);
   const safeTime = escapeHtml(data.time);
-  const safeMethod = escapeHtml((data.paymentMethod || 'Venmo').toUpperCase());
   const safeIssueDate = escapeHtml(data.issueDate);
 
   const receiptHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Daniel Silva Tattoos - Receipt ${safeRef}</title>
+  <title>Daniel Silva Tattoos - Appointment Request ${safeRef}</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
     body { background-color: #0d0e12; color: #e2e8f0; padding: 40px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -843,7 +832,7 @@ function downloadOfficialReceipt(data) {
     .header { text-align: center; border-bottom: 1px dashed rgba(255,255,255,0.15); padding-bottom: 24px; margin-bottom: 24px; }
     .logo-title { font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #d4af37; margin-bottom: 4px; }
     .subtitle { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; }
-    .status-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-top: 14px; letter-spacing: 1px; }
+    .status-badge { display: inline-block; background: rgba(212, 175, 55, 0.15); color: #d4af37; border: 1px solid #d4af37; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-top: 14px; letter-spacing: 1px; }
     .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 16px; border-radius: 10px; }
     .info-box label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
     .info-box span { font-size: 13px; font-weight: 600; color: #f8fafc; word-break: break-all; }
@@ -854,8 +843,111 @@ function downloadOfficialReceipt(data) {
     .detail-table td.val { color: #f8fafc; font-weight: 600; text-align: right; }
     .total-card { background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .total-title { font-size: 14px; font-weight: 700; color: #f8fafc; }
-    .total-amount { font-size: 22px; font-weight: 800; color: #d4af37; }
+    .total-amount { font-size: 20px; font-weight: 800; color: #d4af37; }
     .policy-box { font-size: 11px; color: #94a3b8; line-height: 1.6; background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 24px; }
+    .footer { text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
+    .action-bar { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+    .btn { background: #d4af37; color: #000; font-weight: 700; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .btn:hover { background: #f3cf65; transform: translateY(-1px); }
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+      .receipt-container { background: #fff !important; color: #000 !important; border: 1px solid #ccc !important; box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; padding: 20px !important; }
+      .logo-title { color: #000 !important; }
+      .status-badge { background: #fefce8 !important; color: #ca8a04 !important; border-color: #ca8a04 !important; }
+      .grid-info { background: #f8fafc !important; border-color: #e2e8f0 !important; }
+      .info-box label { color: #64748b !important; }
+      .info-box span { color: #000 !important; }
+      .section-heading { color: #000 !important; border-left-color: #000 !important; }
+      .detail-table td { border-bottom-color: #e2e8f0 !important; }
+      .detail-table td.label { color: #64748b !important; }
+      .detail-table td.val { color: #000 !important; }
+      .total-card { background: #fefce8 !important; border-color: #ca8a04 !important; }
+      .total-title { color: #000 !important; }
+      .total-amount { color: #854d0e !important; }
+      .policy-box { background: #f8fafc !important; border-color: #e2e8f0 !important; color: #475569 !important; }
+      .footer { border-top-color: #e2e8f0 !important; color: #64748b !important; }
+      .action-bar, .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt-container">
+    <div class="header">
+      <div class="logo-title">Daniel Silva Tattoos</div>
+      <div class="subtitle">Official Session Request Summary</div>
+      <div><span class="status-badge">✓ Request Registered (Deposit Pending)</span></div>
+    </div>
+
+    <div class="grid-info">
+      <div class="info-box">
+        <label>Request Reference</label>
+        <span>${safeRef}</span>
+      </div>
+      <div class="info-box">
+        <label>Request ID</label>
+        <span>${safeTxnId}</span>
+      </div>
+      <div class="info-box">
+        <label>Date Submitted</label>
+        <span>${safeIssueDate}</span>
+      </div>
+      <div class="info-box">
+        <label>Deposit Status</label>
+        <span>Pending Contact ($150)</span>
+      </div>
+    </div>
+
+    <div class="section-heading">Client Information</div>
+    <table class="detail-table">
+      <tr>
+        <td class="label">Full Name</td>
+        <td class="val">${safeName}</td>
+      </tr>
+      <tr>
+        <td class="label">Email Address</td>
+        <td class="val">${safeEmail}</td>
+      </tr>
+      <tr>
+        <td class="label">Phone Number</td>
+        <td class="val">${safePhone}</td>
+      </tr>
+    </table>
+
+    <div class="section-heading">Appointment Details</div>
+    <table class="detail-table">
+      <tr>
+        <td class="label">Requested Date</td>
+        <td class="val">${safeDate}</td>
+      </tr>
+      <tr>
+        <td class="label">Requested Time</td>
+        <td class="val">${safeTime}</td>
+      </tr>
+      <tr>
+        <td class="label">Tattoo Style</td>
+        <td class="val">${safeStyle}</td>
+      </tr>
+      <tr>
+        <td class="label">Placement</td>
+        <td class="val">${safePlacement}</td>
+      </tr>
+      <tr>
+        <td class="label">Color Palette</td>
+        <td class="val">${safeColor}</td>
+      </tr>
+    </table>
+
+    <div class="total-card">
+      <div class="total-title">Required Session Deposit</div>
+      <div class="total-amount">$150.00 USD</div>
+    </div>
+
+    <div class="policy-box">
+      <strong>📌 Studio Policy & Terms:</strong><br>
+      • Our studio concierge will contact you directly via phone call, text, or email with official deposit payment instructions ($150) to confirm your session.<br>
+      • Deposit is non-refundable and will be credited toward the final cost of your tattoo on your session date.<br>
+      • Rescheduling requires a minimum of 48 hours notice to preserve your deposit.
+    </div>
     .footer { text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
     .action-bar { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
     .btn { background: #d4af37; color: #000; font-weight: 700; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
