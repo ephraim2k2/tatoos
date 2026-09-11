@@ -2205,9 +2205,9 @@ h1, h2, h3, .font-heading {
 
 @media (max-width: 992px) {
   .floating-chat-launcher {
-    bottom: 5rem;
+    bottom: 5.2rem;
     right: 1rem;
-    padding: 0.6rem 1rem;
+    padding: 0.65rem 1.1rem;
     font-size: 0.85rem;
   }
 
@@ -2215,6 +2215,229 @@ h1, h2, h3, .font-heading {
     bottom: 4.8rem;
     right: 4vw;
     width: 92vw;
+  }
+}
+
+/* ==========================================================================
+   ENHANCED MOBILE RESPONSIVENESS & TOUCH OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+  }
+
+  .container {
+    width: 92%;
+    padding: 0 0.25rem;
+  }
+
+  /* Navigation Bar */
+  .navbar {
+    padding: 0.8rem 0;
+  }
+
+  .logo-text {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+  }
+
+  .logo-symbol {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile Nav Menu Drawer */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 82vw;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(10, 11, 13, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem;
+    padding: 2.5rem 1.5rem;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9999;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.15rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Hero Adjustments */
+  .hero {
+    min-height: auto;
+    padding-top: 110px;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .availability-badge {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .hero-btns .btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+  }
+
+  .stat-num {
+    font-size: 1.6rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* Portfolio Filter & Grid */
+  .filter-bar {
+    gap: 0.5rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.82rem;
+    scroll-snap-align: start;
+  }
+
+  .portfolio-img-wrapper {
+    height: 280px;
+  }
+
+  /* Calendar & Booking Wizard Mobile Touch */
+  .wizard-steps {
+    gap: 0.3rem;
+  }
+
+  .step-label {
+    display: none;
+  }
+
+  .booking-form-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .cal-date {
+    font-size: 0.9rem;
+    min-height: 42px;
+    border-radius: 6px;
+  }
+
+  .time-btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Floating Widgets */
+  .floating-chat-launcher {
+    bottom: 1.2rem;
+    right: 1rem;
+    padding: 0.65rem 1.1rem;
+    font-size: 0.82rem;
+  }
+
+  .support-chat-widget {
+    bottom: 4.5rem;
+    right: 3vw;
+    left: 3vw;
+    width: 94vw;
+    height: 78vh;
+  }
+
+  /* Modal Dialogs Mobile Optimization */
+  .modal-card {
+    width: 94vw !important;
+    max-width: 94vw !important;
+    padding: 1.25rem !important;
+    max-height: 86vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+  }
+
+  .stat-num {
+    font-size: 1.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-wrapper {
+    padding: 1.2rem;
+  }
+
+  .estimate-price {
+    font-size: 2.2rem;
   }
 }
 
